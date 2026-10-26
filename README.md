@@ -235,6 +235,7 @@ workflow silently produces convincing but incorrect output.
 | `claim_verification.md` | Records which external organization claims are verified, unverified, revised, or removed                                                  |
 
 ## Main assumptions
+Each synthetic account is assigned to exactly one play and exactly one experimental arm: treated or holdout.
 
 - Stage numbers represent a meaningful progression.
 - Day 0 and day 60 are comparable observation points.
@@ -245,6 +246,7 @@ workflow silently produces convincing but incorrect output.
 - A two-stage Marketing–Sales difference is large enough to require review.
 
 ## Main limitations
+Because four plays are each tested at α = 0.10 without a multiple-testing correction, approximately 4 × 0.10 = 0.4 false-positive results are expected on average when none of the plays has a real effect.
 
 - The dataset is synthetic and reflects authored assumptions.
 - Each play has only 40 accounts, so statistical power is limited.
