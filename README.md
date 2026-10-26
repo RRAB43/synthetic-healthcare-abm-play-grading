@@ -9,6 +9,8 @@ account movement in a healthcare account-based marketing program.
 
 ## Business problem
 
+This is an independent portfolio exercise built from public job-posting language and has no affiliation with Ambience Healthcare.
+
 Marketing teams often report clicks, emails, meetings, and other activity.
 Sales teams care more about whether target accounts moved forward.
 
@@ -214,8 +216,6 @@ CSV files. It verifies:
 - The revised `p < 0.10` rule for all A and B grades.
 - The 16-record Marketing–Sales disagreement queue.
 
-This is an independent portfolio exercise built from public job-posting language and has no affiliation with Ambience Healthcare.
-
 Expected final message:
 
 ```text
@@ -273,8 +273,8 @@ workflow silently produces convincing but incorrect output.
 
 ## Main limitations
 
+- Because four plays are each tested at `α = 0.10` without a multiple-testing correction, approximately `4 × 0.10 = 0.4` false-positive results are expected on average when none of the plays has an effect.
 - Under a Bonferroni correction, the overall `0.10` threshold is divided by four tests, producing `0.025` per play. P1's `p = 0.029` would not pass that stricter cutoff, so P1 is treated as a promising signal rather than a confirmed effect.
-  -Because four plays are each tested at α = 0.10 without a multiple-testing correction, approximately 4 × 0.10 = 0.4 false-positive results are expected on average when none of the plays has a real effect.
 
 - The dataset is synthetic and reflects authored assumptions.
 - Each play has only 40 accounts, so statistical power is limited.
