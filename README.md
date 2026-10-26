@@ -221,8 +221,7 @@ workflow silently produces convincing but incorrect output.
 │   ├── reference/
 │   └── revised/
 └── docs/
-    ├── claim_verification.md
-    └── interview_notes.md
+    └── claim_verification.md
 ```
 
 ## What each important file does
@@ -234,7 +233,6 @@ workflow silently produces convincing but incorrect output.
 | `run_grading.py`        | Loads the CSV files into SQLite, runs the SQL, calculates permutation p-values, applies the revised rule, and exports results             |
 | `verify_outputs.py`     | Independently recalculates important results and stops with an error if an assertion fails                                                |
 | `claim_verification.md` | Records which external organization claims are verified, unverified, revised, or removed                                                  |
-| `interview_notes.md`    | Explains the design, assumptions, limitations, and expected technical questions                                                           |
 
 ## Main assumptions
 
