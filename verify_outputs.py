@@ -31,6 +31,19 @@ grades = read_csv(REVISED / "play_grades.csv")
 flagged = read_csv(REVISED / "flagged_accounts.csv")
 
 # Check 1: account count and uniqueness
+assignment_ids = [row["account_id"] for row in assignments]
+
+assert len(assignments) == 160, (
+    "Expected exactly one assignment for each account."
+)
+
+assert len(set(assignment_ids)) == 160, (
+    "Each account must appear in exactly one assignment row."
+)
+
+assert set(assignment_ids) == set(account_ids), (
+    "The assignment table must contain every account exactly once."
+)
 account_ids = [row["account_id"] for row in accounts]
 
 assert len(accounts) == 160, "Expected 160 accounts."
