@@ -31,7 +31,11 @@ grades = read_csv(REVISED / "play_grades.csv")
 flagged = read_csv(REVISED / "flagged_accounts.csv")
 
 # Check 1: account count and uniqueness
+account_ids = [row["account_id"] for row in accounts]
 assignment_ids = [row["account_id"] for row in assignments]
+
+assert len(accounts) == 160, "Expected 160 accounts."
+assert len(set(account_ids)) == 160, "Account IDs must be unique."
 
 assert len(assignments) == 160, (
     "Expected exactly one assignment for each account."
@@ -44,10 +48,6 @@ assert len(set(assignment_ids)) == 160, (
 assert set(assignment_ids) == set(account_ids), (
     "The assignment table must contain every account exactly once."
 )
-account_ids = [row["account_id"] for row in accounts]
-
-assert len(accounts) == 160, "Expected 160 accounts."
-assert len(set(account_ids)) == 160, "Account IDs must be unique."
 
 # Check 2: experimental assignment
 arm_counts = defaultdict(Counter)

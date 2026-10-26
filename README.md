@@ -119,8 +119,7 @@ The p-value measures how surprising the observed lift would be if the play had
 no real effect.
 
 This project uses `p < 0.10` as an exploratory significance condition. That
-threshold is less strict than the commonly used `p < 0.05`, so it must be
-explained honestly.
+threshold is less strict than the commonly used `p < 0.05`, so results at this threshold are exploratory.
 
 ### Marketing–Sales disagreement
 
@@ -160,6 +159,17 @@ Version 2 behaves as follows:
 | C             | Original grade C, or an original A/B that fails the significance condition |
 | D             | Original grade D                                                           |
 
+### Interpretation labels
+
+The revised letter grade and the interpretation label answer different questions. The grade applies the grading rules. The label explains why the play received that grade.
+
+| Play                    | Revised grade | Interpretation label | Meaning                                                                          |
+| ----------------------- | ------------: | -------------------- | -------------------------------------------------------------------------------- |
+| P1 Expansion            |             A | Promising signal     | Passed the exploratory `p < 0.10` condition, but this is not a confirmed effect. |
+| P2 Displacement         |             C | C-activity           | Generated activity but little observed account movement.                         |
+| P3 Native-EHR           |             C | C-inconclusive       | Showed positive observed lift, but the statistical evidence was insufficient.    |
+| P4 Evaluation framework |             C | C-inconclusive       | Showed positive observed lift, but the statistical evidence was insufficient.    |
+
 ## Reproduced synthetic results
 
 | Play                    |     Lift | Permutation p-value | Initial grade | Revised grade |
@@ -180,6 +190,19 @@ Healthcare or any real healthcare organization.
 P4 is only a synthetic framework example. It is not assigned to a real account
 and must not be presented as evidence of a real customer relationship.
 
+### Authored probability lift versus observed lift
+
+Because the dataset is synthetic, `generate_data.py` records the probability lift assumed when each play was created. These values are simulation assumptions, not estimates from real healthcare organizations. Comparing them with the observed results shows how much estimates can vary with only 25 treated and 15 holdout accounts per play.
+
+| Play                    | Authored probability lift | Observed lift | Interpretation                                                              |
+| ----------------------- | ------------------------: | ------------: | --------------------------------------------------------------------------- |
+| P1 Expansion            |                    +20 pp |      +34.7 pp | The authored effect appeared larger because of sample noise.                |
+| P2 Displacement         |                    +10 pp |       +2.7 pp | The authored signal was underestimated and missed by the grading threshold. |
+| P3 Native-EHR           |                     +1 pp |      +12.0 pp | A near-zero authored effect appeared positive because of sample noise.      |
+| P4 Evaluation framework |                     +4 pp |      +17.3 pp | A small authored effect appeared much larger because of sample noise.       |
+
+This gap between authored and observed lift demonstrates why a real experiment would require pre-registered sample-size and statistical-power calculations.
+
 ## Independent validation
 
 `verify_outputs.py` independently rebuilds the important results from the raw
@@ -190,6 +213,8 @@ CSV files. It verifies:
 - Advance rates and lift against the raw stage-history data.
 - The revised `p < 0.10` rule for all A and B grades.
 - The 16-record Marketing–Sales disagreement queue.
+
+This is an independent portfolio exercise built from public job-posting language and has no affiliation with Ambience Healthcare.
 
 Expected final message:
 
@@ -235,7 +260,8 @@ workflow silently produces convincing but incorrect output.
 | `claim_verification.md` | Records which external organization claims are verified, unverified, revised, or removed                                                  |
 
 ## Main assumptions
-Each synthetic account is assigned to exactly one play and exactly one experimental arm: treated or holdout.
+
+- Each synthetic account is assigned to exactly one play and exactly one experimental arm: treated or holdout.
 
 - Stage numbers represent a meaningful progression.
 - Day 0 and day 60 are comparable observation points.
@@ -246,7 +272,9 @@ Each synthetic account is assigned to exactly one play and exactly one experimen
 - A two-stage Marketing–Sales difference is large enough to require review.
 
 ## Main limitations
-Because four plays are each tested at α = 0.10 without a multiple-testing correction, approximately 4 × 0.10 = 0.4 false-positive results are expected on average when none of the plays has a real effect.
+
+- Under a Bonferroni correction, the overall `0.10` threshold is divided by four tests, producing `0.025` per play. P1's `p = 0.029` would not pass that stricter cutoff, so P1 is treated as a promising signal rather than a confirmed effect.
+  -Because four plays are each tested at α = 0.10 without a multiple-testing correction, approximately 4 × 0.10 = 0.4 false-positive results are expected on average when none of the plays has a real effect.
 
 - The dataset is synthetic and reflects authored assumptions.
 - Each play has only 40 accounts, so statistical power is limited.
@@ -274,7 +302,7 @@ Before using the framework with real CRM data, I would need:
 - Access controls for healthcare and customer information.
 - Monitoring for data drift and pipeline failures.
 
-## Interview summary
+## Project summary
 
 > I built a synthetic ABM measurement framework that compares treated accounts
 > with holdout accounts using stage advancement rather than activity alone.
