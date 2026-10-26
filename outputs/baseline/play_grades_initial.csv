@@ -1,0 +1,5 @@
+play_id,play_name,treated_n,holdout_n,treated_advance_rate,holdout_advance_rate,lift,avg_roles_engaged,avg_clicks_per_treated_account,grade,permutation_p
+P1,Expansion: beyond-physician documentation and revenue capture,25,15,0.48,0.133,0.347,2.12,1.84,A,0.0292
+P2,Displacement: coding-aware layer alongside incumbent scribe,25,15,0.16,0.133,0.027,1.44,1.56,C,0.6009
+P3,Native-EHR: why a platform beyond the EHR vendor's scribe,25,15,0.12,0.0,0.12,1.68,2.92,B,0.2291
+P4,Evaluation: pilot-measurement framework for governance review,25,15,0.24,0.067,0.173,2.0,2.28,A,0.1694
